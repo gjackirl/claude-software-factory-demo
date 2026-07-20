@@ -1,0 +1,46 @@
+name: Claude Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "What should Claude change?"
+        required: true
+        default: "Add an FAQ section to README.md explaining how to run the project locally, configure environment variables, and run tests."
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  claude-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Ask Claude to update README
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TASK: ${{ github.event.inputs.task }}
+        run: python .github/scripts/claude_build.py
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: claude-build/readme-update
+          title: "Claude Build: Update README"
+          commit-message: "Claude Build: update README"
+          body: |
+            This PR was created by the Claude Build demo agent.
+
+            Task:
+            ${{ github.event.inputs.task }}
