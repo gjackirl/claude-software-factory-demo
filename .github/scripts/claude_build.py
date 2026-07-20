@@ -34,7 +34,14 @@ message = client.messages.create(
     ],
 )
 
-updated_readme = message.content[0].text
+updated_readme = None
+for block in message.content:
+    if block.type == "text":
+        updated_readme = block.text
+        break
+
+if updated_readme is None:
+    raise RuntimeError("Claude's response didn't contain a text block")
 
 with open("README.md", "w", encoding="utf-8") as f:
     f.write(updated_readme)
