@@ -51,3 +51,9 @@ To generate a coverage report:
 ```bash
 npm run test:coverage
 ```
+
+## Roadmap
+
+See [ROADMAP.md](./ROADMAP.md) for the full list of planned work. Highlights:
+
+- **4K export support for Cam 2 and Cam 3** — resolving the current 1080p output cap for cameras with 4K sensors (621 votes on the ideas board)
