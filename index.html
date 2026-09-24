@@ -46,13 +46,14 @@
     nav ul a { text-decoration: none; color: var(--gray); font-weight: 500; transition: color .2s; }
     nav ul a:hover { color: var(--primary); }
     .nav-cta {
-      background: #10b981;
-      color: var(--white) !important;
+      background: #eab308;
+      color: #1a1a1a !important;
       padding: .5rem 1.25rem;
       border-radius: 6px;
       transition: background .2s !important;
     }
-    .nav-cta:hover { background: #059669 !important; color: var(--white) !important; }
+    .nav-cta:hover { background: #ca8a04 !important; color: #1a1a1a !important; }
+    .nav-cta:focus { outline: 3px solid #fef08a; outline-offset: 2px; }
 
     /* ── HERO ── */
     .hero {
@@ -79,6 +80,14 @@
       border: 2px solid var(--primary); transition: background .2s;
     }
     .btn-secondary:hover { background: #eef2ff; }
+    .btn-contact {
+      background: #eab308; color: #1a1a1a; padding: .85rem 2rem;
+      border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none;
+      border: 2px solid #eab308; transition: background .2s, border-color .2s;
+      display: block; text-align: center; margin-top: 2rem;
+    }
+    .btn-contact:hover { background: #ca8a04; border-color: #ca8a04; color: #1a1a1a; }
+    .btn-contact:focus { outline: 3px solid #fef08a; outline-offset: 2px; }
 
     /* ── SECTIONS ── */
     section { padding: 5rem 6%; }
@@ -330,7 +339,7 @@
         <li>SLA-backed delivery</li>
         <li>Dedicated account manager</li>
       </ul>
-      <a href="#contact" class="btn-secondary">Contact Sales</a>
+      <a href="#contact" class="btn-contact">Contact Sales</a>
     </div>
   </div>
 </section>
