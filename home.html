@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumi Labs — Illuminating the Future of Technology</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --accent: #06b6d4;
+      --dark: #0f172a;
+      --gray: #64748b;
+      --light: #f8fafc;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 6%;
+      background: var(--white);
+      box-shadow: 0 1px 8px rgba(0,0,0,.08);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { text-decoration: none; color: var(--gray); font-weight: 500; transition: color .2s; }
+    nav ul a:hover { color: var(--primary); }
+    .nav-cta {
+      background: var(--primary);
+      color: var(--white) !important;
+      padding: .5rem 1.25rem;
+      border-radius: 6px;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--primary-dark) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 6% 5rem;
+      background: linear-gradient(135deg, #eef2ff 0%, #e0f2fe 100%);
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; max-width: 780px; }
+    .hero h1 em { color: var(--primary); font-style: normal; }
+    .hero p { margin-top: 1.25rem; font-size: 1.2rem; color: var(--gray); max-width: 580px; }
+    .hero-actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      background: var(--primary); color: var(--white); padding: .85rem 2rem;
+      border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none;
+      transition: background .2s, transform .1s;
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--white); color: var(--primary); padding: .85rem 2rem;
+      border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none;
+      border: 2px solid var(--primary); transition: background .2s;
+    }
+    .btn-secondary:hover { background: #eef2ff; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 6%; }
+    .section-label { font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; margin-top: .5rem; }
+    .section-sub { color: var(--gray); margin-top: .75rem; max-width: 600px; }
+
+    /* ── STATS ── */
+    .stats { background: var(--primary); color: var(--white); }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem; margin-top: 3rem; text-align: center; }
+    .stat-value { font-size: 3rem; font-weight: 800; }
+    .stat-label { font-size: .95rem; opacity: .85; margin-top: .25rem; }
+
+    /* ── SERVICES ── */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .service-card { background: var(--white); border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; transition: box-shadow .2s; }
+    .service-card:hover { box-shadow: 0 8px 30px rgba(79,70,229,.12); }
+    .service-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .service-card h3 { font-size: 1.15rem; font-weight: 700; }
+    .service-card p { color: var(--gray); margin-top: .5rem; font-size: .95rem; }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: var(--light); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; counter-reset: steps; }
+    .step { text-align: center; }
+    .step-num { width: 3rem; height: 3rem; border-radius: 50%; background: var(--primary); color: var(--white); font-weight: 700; font-size: 1.2rem; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+    .step h3 { font-weight: 700; }
+    .step p { color: var(--gray); margin-top: .4rem; font-size: .95rem; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .testimonial { background: var(--white); border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.75rem; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .testimonial p { font-size: 1rem; color: var(--dark); font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: .75rem; margin-top: 1.25rem; }
+    .avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 700; font-size: .9rem; }
+    .author-info strong { display: block; font-size: .95rem; }
+    .author-info span { font-size: .85rem; color: var(--gray); }
+
+    /* ── PRICING ── */
+    .pricing { background: var(--light); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .plan { background: var(--white); border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; position: relative; }
+    .plan.featured { border-color: var(--primary); box-shadow: 0 8px 30px rgba(79,70,229,.18); }
+    .plan-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--primary); color: var(--white); font-size: .78rem; font-weight: 700; padding: .3rem 1rem; border-radius: 20px; white-space: nowrap; }
+    .plan-name { font-size: 1.1rem; font-weight: 700; }
+    .plan-price { font-size: 2.5rem; font-weight: 800; margin-top: .5rem; }
+    .plan-price span { font-size: 1rem; color: var(--gray); font-weight: 400; }
+    .plan-desc { color: var(--gray); font-size: .9rem; margin-top: .5rem; }
+    .plan ul { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: .6rem; }
+    .plan ul li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+    .plan ul li { font-size: .95rem; }
+    .plan .btn-primary, .plan .btn-secondary { display: block; text-align: center; margin-top: 2rem; }
+
+    /* ── CONTACT ── */
+    .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+    @media (max-width: 700px) { .contact-wrapper { grid-template-columns: 1fr; } }
+    .contact-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .contact-item { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: 1.25rem; }
+    .contact-icon { font-size: 1.3rem; }
+    .contact-item strong { display: block; font-size: .85rem; color: var(--gray); }
+    form { display: flex; flex-direction: column; gap: 1rem; }
+    form input, form textarea, form select {
+      width: 100%; padding: .75rem 1rem; border: 1px solid #cbd5e1; border-radius: 8px;
+      font-size: .95rem; font-family: inherit; transition: border-color .2s;
+    }
+    form input:focus, form textarea:focus, form select:focus { outline: none; border-color: var(--primary); }
+    form textarea { resize: vertical; min-height: 120px; }
+    form button { background: var(--primary); color: var(--white); padding: .85rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s; }
+    form button:hover { background: var(--primary-dark); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); color: #94a3b8; padding: 3rem 6% 2rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2rem; }
+    @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    .footer-brand .logo { color: var(--white); }
+    .footer-brand p { margin-top: .75rem; font-size: .9rem; max-width: 260px; }
+    .footer-col h4 { color: var(--white); font-size: .95rem; font-weight: 700; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .footer-col ul a { color: #94a3b8; text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid #1e293b; margin-top: 2.5rem; padding-top: 1.5rem; text-align: center; font-size: .85rem; }
+
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a href="#" class="logo">Lumi<span>Labs</span></a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#testimonials">Customers</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1>Intelligent Software Solutions for <em>Modern Businesses</em></h1>
+  <p>LumiLabs builds cloud-native platforms, AI-powered tools, and enterprise software that help organisations move faster and scale smarter.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Get a Free Consultation</a>
+    <a href="#services" class="btn-secondary">Explore Services</a>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<section class="stats">
+  <div class="stats-grid">
+    <div><div class="stat-value">350+</div><div class="stat-label">Projects Delivered</div></div>
+    <div><div class="stat-value">98%</div><div class="stat-label">Client Satisfaction</div></div>
+    <div><div class="stat-value">40+</div><div class="stat-label">Countries Served</div></div>
+    <div><div class="stat-value">12yr</div><div class="stat-label">Industry Experience</div></div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">End-to-End Technology Services</h2>
+  <p class="section-sub">From strategy to launch, we partner with you at every stage of the product lifecycle.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">☁️</div>
+      <h3>Cloud Architecture</h3>
+      <p>Design and deploy resilient, cost-optimised cloud infrastructure on AWS, GCP, and Azure.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🤖</div>
+      <h3>AI &amp; Machine Learning</h3>
+      <p>Integrate predictive models, LLM-powered features, and intelligent automation into your products.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Product Engineering</h3>
+      <p>Full-stack web and mobile development with a focus on performance and user experience.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔒</div>
+      <h3>Cybersecurity</h3>
+      <p>Penetration testing, compliance audits, and security-first architecture to protect your data.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚙️</div>
+      <h3>DevOps &amp; Platform</h3>
+      <p>CI/CD pipelines, Kubernetes orchestration, and site reliability engineering at scale.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <h3>Data &amp; Analytics</h3>
+      <p>Real-time dashboards, data warehousing, and BI tooling that turn raw data into decisions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how" class="how">
+  <div class="section-label">Our Process</div>
+  <h2 class="section-title">How We Work</h2>
+  <p class="section-sub">A transparent, collaborative process designed to minimise risk and maximise impact.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h3>Discovery</h3><p>We learn your business goals, technical landscape, and constraints in a structured kick-off.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Strategy &amp; Design</h3><p>Architecture diagrams, wireframes, and a detailed project roadmap — all before a line of code.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Build &amp; Iterate</h3><p>Agile sprints with weekly demos keep you in the loop and allow rapid course-correction.</p></div>
+    <div class="step"><div class="step-num">4</div><h3>Launch &amp; Support</h3><p>Smooth go-live, 24/7 monitoring, and a dedicated support team for ongoing success.</p></div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section id="testimonials">
+  <div class="section-label">Customer Stories</div>
+  <h2 class="section-title">Trusted by Teams Worldwide</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <p>"LumiLabs halved our infrastructure costs and cut deployment time from days to minutes. The team feels like an extension of our own."</p>
+      <div class="testimonial-author">
+        <div class="avatar">SR</div>
+        <div class="author-info"><strong>Sarah Reynolds</strong><span>CTO, Meridian Fintech</span></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"Their AI recommendation engine increased our conversion rate by 34% in the first quarter alone. Exceptional delivery, start to finish."</p>
+      <div class="testimonial-author">
+        <div class="avatar">JO</div>
+        <div class="author-info"><strong>James O'Brien</strong><span>VP Product, Shopora</span></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p>"Security compliance used to keep me up at night. LumiLabs gave us ISO 27001 readiness in eight weeks — I can't recommend them enough."</p>
+      <div class="testimonial-author">
+        <div class="avatar">LK</div>
+        <div class="author-info"><strong>Lena Kauffmann</strong><span>CISO, NovaMed Health</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing" class="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">Flexible Plans for Every Stage</h2>
+  <p class="section-sub">Transparent, predictable pricing with no hidden fees. Upgrade or downgrade at any time.</p>
+  <div class="pricing-grid">
+    <div class="plan">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">$2,500<span>/mo</span></div>
+      <div class="plan-desc">Ideal for startups and early-stage products.</div>
+      <ul>
+        <li>Up to 2 engineers</li>
+        <li>Cloud setup &amp; CI/CD</li>
+        <li>Weekly progress calls</li>
+        <li>Email support</li>
+      </ul>
+      <a href="#contact" class="btn-secondary">Get Started</a>
+    </div>
+    <div class="plan featured">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-name">Growth</div>
+      <div class="plan-price">$7,500<span>/mo</span></div>
+      <div class="plan-desc">For scaling teams that need full-stack expertise.</div>
+      <ul>
+        <li>Up to 6 engineers</li>
+        <li>AI/ML integration</li>
+        <li>Dedicated Slack channel</li>
+        <li>24/7 on-call support</li>
+        <li>Monthly architecture review</li>
+      </ul>
+      <a href="#contact" class="btn-primary">Get Started</a>
+    </div>
+    <div class="plan">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price">Custom</div>
+      <div class="plan-desc">Tailored engagements for complex, large-scale programmes.</div>
+      <ul>
+        <li>Unlimited engineers</li>
+        <li>On-site workshops</li>
+        <li>Executive sponsorship</li>
+        <li>SLA-backed delivery</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a href="#contact" class="btn-secondary">Contact Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <h2 class="section-title">Let's Build Something Great</h2>
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <h3>We'd love to hear about your project</h3>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div>
+          <strong>Headquarters</strong>
+          42 Innovation Drive, Suite 900<br>Dublin 2, D02 XY45, Ireland
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📞</span>
+        <div>
+          <strong>Phone</strong>
+          +353 1 555 0192
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <strong>Email</strong>
+          hello@lumilabs.io
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🕒</span>
+        <div>
+          <strong>Office Hours</strong>
+          Monday – Friday, 9 AM – 6 PM IST
+        </div>
+      </div>
+    </div>
+    <form onsubmit="return false;">
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Work Email" required />
+      <input type="text" placeholder="Company Name" />
+      <select>
+        <option value="" disabled selected>How can we help?</option>
+        <option>Cloud Architecture</option>
+        <option>AI &amp; Machine Learning</option>
+        <option>Product Engineering</option>
+        <option>Cybersecurity</option>
+        <option>DevOps &amp; Platform</option>
+        <option>Data &amp; Analytics</option>
+        <option>General Enquiry</option>
+      </select>
+      <textarea placeholder="Tell us about your project…"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">Lumi<span>Labs</span></a>
+      <p>Illuminating the future of technology — one solution at a time.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Cloud Architecture</a></li>
+        <li><a href="#">AI &amp; ML</a></li>
+        <li><a href="#">Product Engineering</a></li>
+        <li><a href="#">Cybersecurity</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Security</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 LumiLabs Ltd. Registered in Ireland. Company No. 654321. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
