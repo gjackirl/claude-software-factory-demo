@@ -110,10 +110,12 @@
 
     /* ── TESTIMONIALS ── */
     .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
-    .testimonial { background: var(--white); border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.75rem; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .testimonial { background: var(--white); border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.75rem; box-shadow: 0 2px 12px rgba(0,0,0,.06); transition: box-shadow .2s; }
+    .testimonial:hover { box-shadow: 0 8px 30px rgba(79,70,229,.12); }
+    .testimonial-stars { color: #f59e0b; font-size: 1rem; letter-spacing: .05em; margin-bottom: .75rem; }
     .testimonial p { font-size: 1rem; color: var(--dark); font-style: italic; }
     .testimonial-author { display: flex; align-items: center; gap: .75rem; margin-top: 1.25rem; }
-    .avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 700; font-size: .9rem; }
+    .avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 700; font-size: .9rem; flex-shrink: 0; }
     .author-info strong { display: block; font-size: .95rem; }
     .author-info span { font-size: .85rem; color: var(--gray); }
 
@@ -256,8 +258,10 @@
 <section id="testimonials">
   <div class="section-label">Customer Stories</div>
   <h2 class="section-title">Trusted by Teams Worldwide</h2>
+  <p class="section-sub">Don't just take our word for it — hear from the teams who've shipped with LumiLabs.</p>
   <div class="testimonials-grid">
     <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
       <p>"LumiLabs halved our infrastructure costs and cut deployment time from days to minutes. The team feels like an extension of our own."</p>
       <div class="testimonial-author">
         <div class="avatar">SR</div>
@@ -265,6 +269,7 @@
       </div>
     </div>
     <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
       <p>"Their AI recommendation engine increased our conversion rate by 34% in the first quarter alone. Exceptional delivery, start to finish."</p>
       <div class="testimonial-author">
         <div class="avatar">JO</div>
@@ -272,6 +277,7 @@
       </div>
     </div>
     <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
       <p>"Security compliance used to keep me up at night. LumiLabs gave us ISO 27001 readiness in eight weeks — I can't recommend them enough."</p>
       <div class="testimonial-author">
         <div class="avatar">LK</div>
