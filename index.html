@@ -160,6 +160,36 @@
     form button { background: var(--primary); color: var(--white); padding: .85rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s; }
     form button:hover { background: var(--primary-dark); }
 
+    /* ── NEWSLETTER ── */
+    .newsletter { background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); color: var(--white); text-align: center; }
+    .newsletter h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; }
+    .newsletter p { margin-top: .75rem; font-size: 1.05rem; opacity: .9; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .newsletter-form { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 2rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .newsletter-input-row { display: flex; width: 100%; gap: .75rem; flex-wrap: wrap; }
+    .newsletter-form input[type="email"] {
+      flex: 1; min-width: 200px; padding: .85rem 1.1rem;
+      border: none; border-radius: 8px; font-size: 1rem;
+      font-family: inherit; color: var(--dark);
+    }
+    .newsletter-form input[type="email"]:focus { outline: 3px solid #a5b4fc; }
+    .newsletter-form button {
+      background: var(--dark); color: var(--white); padding: .85rem 1.75rem;
+      border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: background .2s; white-space: nowrap;
+    }
+    .newsletter-form button:hover { background: #1e293b; }
+    .newsletter-consent { display: flex; align-items: flex-start; gap: .6rem; text-align: left; width: 100%; font-size: .88rem; line-height: 1.5; opacity: .95; }
+    .newsletter-consent input[type="checkbox"] {
+      margin-top: .2rem; width: 1.1rem; height: 1.1rem; flex-shrink: 0;
+      accent-color: var(--accent); cursor: pointer;
+    }
+    .newsletter-consent label { cursor: pointer; }
+    .newsletter-consent a { color: #bfdbfe; text-decoration: underline; }
+    .newsletter-consent a:hover { color: var(--white); }
+    .newsletter-privacy { font-size: .82rem; opacity: .8; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .newsletter-privacy a { color: #bfdbfe; text-decoration: underline; }
+    .newsletter-privacy a:hover { color: var(--white); }
+
     /* ── FOOTER ── */
     footer { background: var(--dark); color: #94a3b8; padding: 3rem 6% 2rem; }
     .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2rem; }
@@ -400,6 +430,64 @@
   </div>
 </section>
 
+<!-- ── NEWSLETTER ── -->
+<section id="newsletter" class="newsletter">
+  <div class="section-label" style="color:#a5f3fc;">Stay Informed</div>
+  <h2>Get the Latest from LumiLabs</h2>
+  <p>Insights on cloud, AI, and engineering — delivered straight to your inbox. No spam, ever.</p>
+  <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event);" novalidate>
+    <div class="newsletter-input-row">
+      <input
+        type="email"
+        id="newsletter-email"
+        name="newsletter-email"
+        placeholder="your@email.com"
+        autocomplete="email"
+        required
+        aria-label="Email address"
+      />
+      <button type="submit">Subscribe</button>
+    </div>
+
+    <!-- GDPR consent checkbox — opt-in, unchecked by default -->
+    <label class="newsletter-consent">
+      <input
+        type="checkbox"
+        id="newsletter-consent"
+        name="newsletter-consent"
+        required
+        aria-required="true"
+      />
+      <span>
+        I agree to receive the LumiLabs newsletter and occasional product updates by email.
+        I understand that LumiLabs will process my email address for this purpose in accordance with
+        its <a href="#privacy-policy" aria-label="Privacy Policy">Privacy Policy</a>,
+        and that I can unsubscribe at any time by clicking the unsubscribe link in any email.
+      </span>
+    </label>
+
+    <p class="newsletter-privacy">
+      🔒 <strong>Your privacy matters.</strong>
+      We use your email solely to send you the newsletter you signed up for.
+      We do not sell or share your data with third parties.
+      You can unsubscribe instantly using the link at the bottom of every email.
+      For full details, see our <a href="#privacy-policy">Privacy Policy</a>.
+    </p>
+  </form>
+</section>
+
+<script>
+  function handleNewsletterSubmit(e) {
+    e.preventDefault();
+    var consent = document.getElementById('newsletter-consent');
+    if (!consent.checked) {
+      alert('Please tick the consent checkbox before subscribing.');
+      return;
+    }
+    alert('Thank you for subscribing! Check your inbox for a confirmation email.');
+  }
+</script>
+
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-grid">
@@ -428,7 +516,7 @@
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
-        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#" id="privacy-policy">Privacy Policy</a></li>
         <li><a href="#">Terms of Service</a></li>
         <li><a href="#">Cookie Policy</a></li>
         <li><a href="#">Security</a></li>
