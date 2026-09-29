@@ -21,6 +21,12 @@ Player Highlights allows coaching staff to compile short video clips for individ
 | Defensive actions  | Tackles, interceptions, blocks, and clearances            |
 | Coach notes        | Tagged moments with a text or audio annotation from the coach |
 
+## Export Options
+
+When exporting a reel, coaches can choose to bake in any tactical drawings or markups they have added to individual clips. With this option enabled, the exported video includes all on-screen annotations at the correct timestamps — no third-party editing required.
+
+See [TACTICAL_DRAWINGS_EXPORT.md](./TACTICAL_DRAWINGS_EXPORT.md) for the full feature spec and API reference.
+
 ## Notes
 
 Reels are generated on demand and can be exported as a single video file or shared as a timestamped link. Access is scoped per player so athletes only see their own reel.
