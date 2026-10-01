@@ -15,6 +15,8 @@
       --gray: #64748b;
       --light: #f8fafc;
       --white: #ffffff;
+      --cta: #f97316;
+      --cta-dark: #ea580c;
     }
 
     body {
@@ -46,14 +48,14 @@
     nav ul a { text-decoration: none; color: var(--gray); font-weight: 500; transition: color .2s; }
     nav ul a:hover { color: var(--primary); }
     .nav-cta {
-      background: #eab308;
-      color: #1e293b !important;
+      background: var(--cta);
+      color: var(--white) !important;
       padding: .5rem 1.25rem;
       border-radius: 6px;
       transition: background .2s !important;
     }
-    .nav-cta:hover { background: #ca8a04 !important; color: #1e293b !important; }
-    .nav-cta:focus { outline: 3px solid #fde68a; outline-offset: 2px; }
+    .nav-cta:hover { background: var(--cta-dark) !important; color: var(--white) !important; }
+    .nav-cta:focus { outline: 3px solid #fed7aa; outline-offset: 2px; }
 
     /* ── HERO ── */
     .hero {
@@ -69,25 +71,25 @@
     .hero p { margin-top: 1.25rem; font-size: 1.2rem; color: var(--gray); max-width: 580px; }
     .hero-actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center; }
     .btn-primary {
-      background: var(--primary); color: var(--white); padding: .85rem 2rem;
+      background: var(--cta); color: var(--white); padding: .85rem 2rem;
       border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none;
       transition: background .2s, transform .1s;
     }
-    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-primary:hover { background: var(--cta-dark); transform: translateY(-1px); }
     .btn-secondary {
-      background: var(--white); color: var(--primary); padding: .85rem 2rem;
+      background: var(--white); color: var(--cta); padding: .85rem 2rem;
       border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none;
-      border: 2px solid var(--primary); transition: background .2s;
+      border: 2px solid var(--cta); transition: background .2s;
     }
-    .btn-secondary:hover { background: #eef2ff; }
+    .btn-secondary:hover { background: #fff7ed; }
     .btn-contact {
-      background: #7c3aed; color: var(--white); padding: .85rem 2rem;
+      background: var(--cta); color: var(--white); padding: .85rem 2rem;
       border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none;
-      border: 2px solid #7c3aed; transition: background .2s, border-color .2s;
+      border: 2px solid var(--cta); transition: background .2s, border-color .2s;
       display: block; text-align: center; margin-top: 2rem;
     }
-    .btn-contact:hover { background: #6d28d9; border-color: #6d28d9; color: var(--white); }
-    .btn-contact:focus { outline: 3px solid #c4b5fd; outline-offset: 2px; }
+    .btn-contact:hover { background: var(--cta-dark); border-color: var(--cta-dark); color: var(--white); }
+    .btn-contact:focus { outline: 3px solid #fed7aa; outline-offset: 2px; }
 
     /* ── SECTIONS ── */
     section { padding: 5rem 6%; }
@@ -157,8 +159,8 @@
     }
     form input:focus, form textarea:focus, form select:focus { outline: none; border-color: var(--primary); }
     form textarea { resize: vertical; min-height: 120px; }
-    form button { background: var(--primary); color: var(--white); padding: .85rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s; }
-    form button:hover { background: var(--primary-dark); }
+    form button { background: var(--cta); color: var(--white); padding: .85rem; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s; }
+    form button:hover { background: var(--cta-dark); }
 
     /* ── FOOTER ── */
     footer { background: var(--dark); color: #94a3b8; padding: 3rem 6% 2rem; }
