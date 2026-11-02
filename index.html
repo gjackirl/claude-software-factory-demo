@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lumi Labs — Illuminating the Future of Technology</title>
+  <script>
+    // Apply saved (or system) theme before first paint to avoid a flash.
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (e) {}
+      var theme = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -17,12 +26,46 @@
       --white: #ffffff;
       --cta: #c2410c;
       --cta-dark: #9a3412;
+
+      /* Theme tokens (light) */
+      color-scheme: light;
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --input-border: #cbd5e1;
+      --section-alt: #f8fafc;
+      --brand-text: #4f46e5;
+      --hero-bg: linear-gradient(135deg, #eef2ff 0%, #e0f2fe 100%);
+      --secondary-hover: #fff7ed;
+      --nav-shadow: 0 1px 8px rgba(0,0,0,.08);
+      --footer-bg: #0f172a;
+    }
+
+    /* Theme tokens (dark) */
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0b1120;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --border: #334155;
+      --input-border: #475569;
+      --section-alt: #111827;
+      --brand-text: #a5b4fc;
+      --hero-bg: linear-gradient(135deg, #1e1b4b 0%, #0c4a6e 100%);
+      --secondary-hover: rgba(194,65,12,.18);
+      --nav-shadow: 0 1px 8px rgba(0,0,0,.5);
+      --footer-bg: #020617;
     }
 
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      color: var(--dark);
+      color: var(--text);
+      background: var(--bg);
       line-height: 1.6;
+      transition: background-color .2s, color .2s;
     }
 
     /* ── NAV ── */
@@ -34,19 +77,29 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem 6%;
-      background: var(--white);
-      box-shadow: 0 1px 8px rgba(0,0,0,.08);
+      background: var(--surface);
+      box-shadow: var(--nav-shadow);
     }
     .logo {
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--primary);
+      color: var(--brand-text);
       text-decoration: none;
     }
     .logo span { color: var(--accent); }
     nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav ul a { text-decoration: none; color: var(--gray); font-weight: 500; transition: color .2s; }
-    nav ul a:hover { color: var(--primary); }
+    nav ul a { text-decoration: none; color: var(--muted); font-weight: 500; transition: color .2s; }
+    nav ul a:hover { color: var(--brand-text); }
+    .nav-right { display: flex; align-items: center; gap: 2rem; }
+    .theme-toggle {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border); border-radius: 999px;
+      padding: .4rem .9rem; font: inherit; font-size: .9rem; font-weight: 500;
+      cursor: pointer; transition: background .2s, border-color .2s;
+    }
+    .theme-toggle:hover { background: var(--section-alt); border-color: var(--muted); }
+    .theme-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
     .nav-cta {
       background: var(--cta);
       color: var(--white) !important;
@@ -64,11 +117,11 @@
       align-items: center;
       text-align: center;
       padding: 6rem 6% 5rem;
-      background: linear-gradient(135deg, #eef2ff 0%, #e0f2fe 100%);
+      background: var(--hero-bg);
     }
     .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; max-width: 780px; }
-    .hero h1 em { color: var(--primary); font-style: normal; }
-    .hero p { margin-top: 1.25rem; font-size: 1.2rem; color: var(--gray); max-width: 580px; }
+    .hero h1 em { color: var(--brand-text); font-style: normal; }
+    .hero p { margin-top: 1.25rem; font-size: 1.2rem; color: var(--muted); max-width: 580px; }
     .hero-actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center; }
     .btn-primary {
       background: var(--cta); color: var(--white); padding: .85rem 2rem;
@@ -77,11 +130,11 @@
     }
     .btn-primary:hover { background: var(--cta-dark); transform: translateY(-1px); }
     .btn-secondary {
-      background: var(--white); color: var(--cta); padding: .85rem 2rem;
+      background: var(--surface); color: var(--cta); padding: .85rem 2rem;
       border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none;
       border: 2px solid var(--cta); transition: background .2s;
     }
-    .btn-secondary:hover { background: #fff7ed; }
+    .btn-secondary:hover { background: var(--secondary-hover); }
     .btn-contact {
       background: var(--cta); color: var(--white); padding: .85rem 2rem;
       border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none;
@@ -95,7 +148,7 @@
     section { padding: 5rem 6%; }
     .section-label { font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
     .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; margin-top: .5rem; }
-    .section-sub { color: var(--gray); margin-top: .75rem; max-width: 600px; }
+    .section-sub { color: var(--muted); margin-top: .75rem; max-width: 600px; }
 
     /* ── STATS ── */
     .stats { background: var(--primary); color: var(--white); }
@@ -105,41 +158,41 @@
 
     /* ── SERVICES ── */
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-top: 3rem; }
-    .service-card { background: var(--white); border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; transition: box-shadow .2s; }
+    .service-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: box-shadow .2s; }
     .service-card:hover { box-shadow: 0 8px 30px rgba(79,70,229,.12); }
     .service-icon { font-size: 2.2rem; margin-bottom: 1rem; }
     .service-card h3 { font-size: 1.15rem; font-weight: 700; }
-    .service-card p { color: var(--gray); margin-top: .5rem; font-size: .95rem; }
+    .service-card p { color: var(--muted); margin-top: .5rem; font-size: .95rem; }
 
     /* ── HOW IT WORKS ── */
-    .how { background: var(--light); }
+    .how { background: var(--section-alt); }
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; counter-reset: steps; }
     .step { text-align: center; }
     .step-num { width: 3rem; height: 3rem; border-radius: 50%; background: var(--primary); color: var(--white); font-weight: 700; font-size: 1.2rem; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
     .step h3 { font-weight: 700; }
-    .step p { color: var(--gray); margin-top: .4rem; font-size: .95rem; }
+    .step p { color: var(--muted); margin-top: .4rem; font-size: .95rem; }
 
     /* ── TESTIMONIALS ── */
     .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
-    .testimonial { background: var(--white); border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.75rem; box-shadow: 0 2px 12px rgba(0,0,0,.06); transition: box-shadow .2s; }
+    .testimonial { background: var(--surface); border-left: 4px solid var(--accent); border-radius: 8px; padding: 1.75rem; box-shadow: 0 2px 12px rgba(0,0,0,.06); transition: box-shadow .2s; }
     .testimonial:hover { box-shadow: 0 8px 30px rgba(79,70,229,.12); }
     .testimonial-stars { color: #f59e0b; font-size: 1rem; letter-spacing: .05em; margin-bottom: .75rem; }
-    .testimonial p { font-size: 1rem; color: var(--dark); font-style: italic; }
+    .testimonial p { font-size: 1rem; color: var(--text); font-style: italic; }
     .testimonial-author { display: flex; align-items: center; gap: .75rem; margin-top: 1.25rem; }
     .avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 700; font-size: .9rem; flex-shrink: 0; }
     .author-info strong { display: block; font-size: .95rem; }
-    .author-info span { font-size: .85rem; color: var(--gray); }
+    .author-info span { font-size: .85rem; color: var(--muted); }
 
     /* ── PRICING ── */
-    .pricing { background: var(--light); }
+    .pricing { background: var(--section-alt); }
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; margin-top: 3rem; }
-    .plan { background: var(--white); border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; position: relative; }
+    .plan { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; position: relative; }
     .plan.featured { border-color: var(--primary); box-shadow: 0 8px 30px rgba(79,70,229,.18); }
     .plan-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--primary); color: var(--white); font-size: .78rem; font-weight: 700; padding: .3rem 1rem; border-radius: 20px; white-space: nowrap; }
     .plan-name { font-size: 1.1rem; font-weight: 700; }
     .plan-price { font-size: 2.5rem; font-weight: 800; margin-top: .5rem; }
-    .plan-price span { font-size: 1rem; color: var(--gray); font-weight: 400; }
-    .plan-desc { color: var(--gray); font-size: .9rem; margin-top: .5rem; }
+    .plan-price span { font-size: 1rem; color: var(--muted); font-weight: 400; }
+    .plan-desc { color: var(--muted); font-size: .9rem; margin-top: .5rem; }
     .plan ul { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: .6rem; }
     .plan ul li::before { content: "✓ "; color: var(--accent); font-weight: 700; }
     .plan ul li { font-size: .95rem; }
@@ -151,10 +204,11 @@
     .contact-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; }
     .contact-item { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: 1.25rem; }
     .contact-icon { font-size: 1.3rem; }
-    .contact-item strong { display: block; font-size: .85rem; color: var(--gray); }
+    .contact-item strong { display: block; font-size: .85rem; color: var(--muted); }
     form { display: flex; flex-direction: column; gap: 1rem; }
     form input, form textarea, form select {
-      width: 100%; padding: .75rem 1rem; border: 1px solid #cbd5e1; border-radius: 8px;
+      width: 100%; padding: .75rem 1rem; border: 1px solid var(--input-border); border-radius: 8px;
+      background: var(--surface); color: var(--text);
       font-size: .95rem; font-family: inherit; transition: border-color .2s;
     }
     form input:focus, form textarea:focus, form select:focus { outline: none; border-color: var(--primary); }
@@ -163,7 +217,7 @@
     form button:hover { background: var(--cta-dark); }
 
     /* ── FOOTER ── */
-    footer { background: var(--dark); color: #94a3b8; padding: 3rem 6% 2rem; }
+    footer { background: var(--footer-bg); color: #94a3b8; padding: 3rem 6% 2rem; }
     .footer-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 2rem; }
     @media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
     .footer-brand .logo { color: var(--white); }
@@ -184,13 +238,19 @@
 <!-- ── NAVIGATION ── -->
 <nav>
   <a href="#" class="logo">Lumi<span>Labs</span></a>
-  <ul>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#testimonials">Customers</a></li>
-    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Customers</a></li>
+      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Switch to dark mode">
+      <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+      <span class="theme-toggle-label">Dark</span>
+    </button>
+  </div>
 </nav>
 
 <!-- ── HERO ── -->
@@ -441,6 +501,32 @@
     &copy; 2026 LumiLabs Ltd. Registered in Ireland. Company No. 654321. All rights reserved.
   </div>
 </footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('theme-toggle');
+    var icon = btn.querySelector('.theme-toggle-icon');
+    var label = btn.querySelector('.theme-toggle-label');
+
+    function render() {
+      var isDark = root.getAttribute('data-theme') === 'dark';
+      btn.setAttribute('aria-pressed', String(isDark));
+      btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      icon.textContent = isDark ? '☀️' : '🌙';
+      label.textContent = isDark ? 'Light' : 'Dark';
+    }
+
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      render();
+    });
+
+    render();
+  })();
+</script>
 
 </body>
 </html>
